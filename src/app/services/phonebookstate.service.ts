@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class PhonebookStateService {
-  public phonebookId:any;
-  public datasource:any;
+  private phonebookId:any;
+  private datasource:any;
+  private message:any
   
   public getPhonebook(): any {
     return this.phonebookId;

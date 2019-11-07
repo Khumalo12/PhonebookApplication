@@ -22,6 +22,7 @@ import { ContactListComponent } from './contact-list/contact-list.component';
 import { ContactCreateComponent } from './contact-create/contact-create.component';
 import { PhonebookStateService } from './services/phonebookstate.service';
 import { ContactSearchComponent } from './contact-search/contact-search.component';
+import { AlertsComponent } from './alerts/alerts.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ContactSearchComponent } from './contact-search/contact-search.componen
     MenuComponent,
     ContactListComponent,
     ContactCreateComponent,
-    ContactSearchComponent
+    ContactSearchComponent,
+    AlertsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,7 @@ import { ContactSearchComponent } from './contact-search/contact-search.componen
   ],
   entryComponents: [
     ContactCreateComponent,
+    AlertsComponent
   ],
   providers: [PhonebookStateService],
   bootstrap: [AppComponent]

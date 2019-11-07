@@ -5,7 +5,6 @@ import { map, shareReplay } from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ContactCreateComponent } from '../contact-create/contact-create.component';
 import { ContactsService } from '../services/contacts.service';
-import { PhonebookStateService } from '../services/phonebookstate.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
@@ -32,9 +31,6 @@ export class MenuComponent {
     this.dialog.open(ContactCreateComponent, {
       width: '500px',
       data: { name: this.name, phonenumber: this.phonenumber }
-    });
-    this.router.navigate(['contactcreate'],{
-      relativeTo: this.route
     });
   }
 
