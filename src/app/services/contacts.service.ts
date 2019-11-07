@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 })
 export class ContactsService {
 
-  constructor(private http: HttpClient) {  }
+  constructor(private http: HttpClient) { }
 
   apiUrl = environment.apiUrl;
 
@@ -20,14 +20,15 @@ export class ContactsService {
     return this.http.get(this.apiUrl + "/Contact/SearchContacts?phonebookId=" + phonebookId + "&name=" + name);
   }
 
-  public createContact(data: any): Observable<any> {
+  public createContact(name, phonenumber, id: any): Observable<any> {
     let headers = this.createRequestHeader();
-    let body = this.createRequestBody(data.name, data.phonenumber);
-    return this.http.post("../../assets/phonebook.json", body, {headers: headers})
+    let body = this.createRequestBody(name, phonenumber, id);
+    return this.http.post(this.apiUrl + "/Contact/CreateContacts", body, { headers: headers });
   }
 
-  private createRequestBody(name: string, phonenumber: string) {
-    let body = { "Name": name, "PhoneNumber": phonenumber }
+  private createRequestBody(name: string, phonenumber: string, id: string) {
+    let intId = parseInt(id);
+    let body = { "name": name, "phonenumber": phonenumber, "phonebook_id": intId }
     return body;
   }
 
@@ -37,5 +38,10 @@ export class ContactsService {
       "Content-Type": "application/json",
     });
     return headers;
+  }
+
+  handleErrors(error: Response) {
+    console.log(JSON.stringify(error.json()));
+    return Observable.throw(error);
   }
 }

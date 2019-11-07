@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ContactsService } from '../services/contacts.service';
 import { PhonebookStateService } from '../services/phonebookstate.service';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contact-search',
@@ -20,18 +19,14 @@ export class ContactSearchComponent implements OnInit {
   constructor(private contactsService: ContactsService, public phonebookState: PhonebookStateService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.dataSource = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       console.log(params);
       this.searchvalue = params.searchvalue;
-      this.searchContact();
+      let id = this.phonebookState.getPhonebook();
+      this.contactsService.searchContacts(id, this.searchvalue)
+        .subscribe((result) => {
+          this.dataSource = result;
+        });
     });
-  }
-
-  searchContact() {
-    let id = this.phonebookState.getPhonebook();
-    this.contactsService.searchContacts(id, this.searchvalue)
-      .subscribe((result) => {
-        this.dataSource = result;
-      });
   }
 }

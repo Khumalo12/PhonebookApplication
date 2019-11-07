@@ -3,7 +3,7 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar><a (click)="toContactList()">Phone Book</a></mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item (click)="toContactList()">View Contact</a>
+      <a mat-list-item (click)="toContactList()">View Contacts</a>
       <a mat-list-item (click)="openDialog()">Create Contact</a>
     </mat-nav-list>
   </mat-sidenav>

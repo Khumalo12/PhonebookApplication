@@ -33,6 +33,9 @@ export class MenuComponent {
       width: '500px',
       data: { name: this.name, phonenumber: this.phonenumber }
     });
+    this.router.navigate(['contactcreate'],{
+      relativeTo: this.route
+    });
   }
 
   searchContact() {
@@ -45,6 +48,6 @@ export class MenuComponent {
   }
 
   toContactList() {
-    this.router.navigate(['/contactlist']);
+    this.router.navigate(['contactlist']);
   }
 }
