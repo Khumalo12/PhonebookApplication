@@ -1,0 +1,22 @@
+<table mat-table [dataSource]="dataSource">
+        <caption>Phonebook List</caption>
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="Name">
+          <th id="Name "mat-header-cell *matHeaderCellDef><h6>Name</h6></th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+      
+        <!-- Phone Number Column -->
+        <ng-container matColumnDef="Phone Number">
+          <th id="phoneNumber" mat-header-cell *matHeaderCellDef><h6>Phone Number</h6></th>
+          <td mat-cell *matCellDef="let element"> {{element.phonenumber}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+      </table>
+      
+      
