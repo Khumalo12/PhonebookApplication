@@ -34,8 +34,8 @@ export class ContactCreateComponent {
     this.dialogRef.beforeClosed().subscribe(result => {
       if (result.name != undefined && result.phonenumber != undefined) {
         this.contactsService.createContact(result.name, result.phonenumber, id).subscribe(
-          response => {console.log(response); this.openSnackBar();},
-          err => console.log(err)     
+          response => {console.log(response); this.openSuccessSnackBar();},
+          err => {console.log(err) ; this.openFailSnackBar()}    
         );
         this.router.navigate(['/contactlist'], { relativeTo: this.route });
         this.dialogRef.close();
@@ -43,9 +43,15 @@ export class ContactCreateComponent {
     });
   }
 
-  openSnackBar(): void {
-    this._snackBar.open("Contact created", "Done", {
+  openSuccessSnackBar(): void {
+    this._snackBar.open("Contact created", "Success", {
       duration: 2000,
+    });
+  }
+
+  openFailSnackBar(): void {
+    this._snackBar.open("Error creating contact ", "Error", {
+      duration: 4000,
     });
   }
 }
