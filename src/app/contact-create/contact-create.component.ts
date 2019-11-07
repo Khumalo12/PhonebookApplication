@@ -3,6 +3,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { ContactsService } from '../services/contacts.service';
 import { PhonebookStateService } from '../services/phonebookstate.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 
 export interface Entry {
@@ -20,7 +22,7 @@ export interface Entry {
 export class ContactCreateComponent {
   constructor(
     public dialogRef: MatDialogRef<ContactCreateComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Entry, private contactsService: ContactsService, public phonebookState: PhonebookStateService, private router: Router, private route: ActivatedRoute) { }
+    @Inject(MAT_DIALOG_DATA) public data: Entry, private contactsService: ContactsService, public phonebookState: PhonebookStateService, private router: Router, private route: ActivatedRoute, private _snackBar: MatSnackBar) { }
 
   onCancelClick(): void {
     this.dialogRef.close();
@@ -32,12 +34,18 @@ export class ContactCreateComponent {
     this.dialogRef.beforeClosed().subscribe(result => {
       if (result.name != undefined && result.phonenumber != undefined) {
         this.contactsService.createContact(result.name, result.phonenumber, id).subscribe(
-          response => console.log(response),
-          err => console.log(err)
+          response => {console.log(response); this.openSnackBar();},
+          err => console.log(err)     
         );
         this.router.navigate(['/contactlist'], { relativeTo: this.route });
         this.dialogRef.close();
       }
+    });
+  }
+
+  openSnackBar(): void {
+    this._snackBar.open("Contact created", "Done", {
+      duration: 2000,
     });
   }
 }
